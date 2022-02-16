@@ -1,0 +1,20 @@
+apiVersion: perf.kubestone.xridge.io/v1alpha1
+kind: Fio
+metadata:
+  name: 
+spec:
+  cmdLineArgs: 
+  podConfig:
+    podScheduling:
+      nodeName: 
+  image:
+    name: 
+  volume:
+    persistentVolumeClaimSpec:
+      accessModes:      
+      resources:
+        requests:
+          storage:
+    volumeSource:
+      persistentVolumeClaim:
+        claimName: GENERATED

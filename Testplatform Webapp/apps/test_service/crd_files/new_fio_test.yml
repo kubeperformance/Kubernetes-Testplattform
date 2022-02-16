@@ -1,0 +1,21 @@
+apiVersion: perf.kubestone.xridge.io/v1alpha1
+kind: Fio
+metadata:
+  name: myFioTest
+spec:
+  cmdLineArgs: --name=myFioTest --iodepth=1 --rw=randwrite --bs=4m --size=256M
+  image:
+    name: theitguy0x7cc/myfio:latest
+  podConfig:
+    podScheduling:
+      nodeName: raspiworker2
+  volume:
+    persistentVolumeClaimSpec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+    volumeSource:
+      persistentVolumeClaim:
+        claimName: GENERATED

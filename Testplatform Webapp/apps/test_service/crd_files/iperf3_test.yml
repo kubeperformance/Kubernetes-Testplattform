@@ -1,0 +1,29 @@
+apiVersion: perf.kubestone.xridge.io/v1alpha1
+kind: Iperf3
+metadata:
+  name: iperf3-sample
+spec:
+  image:
+    name: theitguy0x7cc/iperf3_arm:latest
+    pullPolicy: Always
+    # pullSecret: null
+
+  serverConfiguration:
+    cmdLineArgs: --verbose
+    # nodeSelector: null
+    podLabels:
+      iperf-mode: server
+
+    podScheduling:
+      nodeName: raspiworker2
+      # tolerations: null
+      # nodeSelector: null
+      # nodeName: null
+    hostNetwork: false
+    
+  clientConfiguration:
+    podScheduling:
+      nodeName: raspiworker1
+      
+
+  udp: false

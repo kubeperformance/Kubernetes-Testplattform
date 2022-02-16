@@ -1,0 +1,100 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Testüberblick {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Tests</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            
+                            <li class="breadcrumb-item"><a href="javascript:">Test Überblick</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+                    <!-- [ basic-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Tests</h5>
+                                <span class="d-block m-t-5">Überblick über alles ausgeführten Tests</span>
+                            </div>
+                            <div class="card-block table-border-style">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Official Testname</th>
+                                                <th>Custom Testname</th>
+                                                <th>Status</th>
+                                                <th>Info</th>
+                                                <th>Details</th>
+                                                <th>Aktion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for test in testsAsList %}
+                                            <tr>
+                                                <th scope="row"> {{ forloop.counter }} </th>
+                                                <td>{{ test.test_name }}</td>
+                                                <td>{{ test.custom_test_name }}</td>
+                                                <td>{{ test.test_status }}</td>
+                                               
+                                                {% if test.test_status == "Completed" %}
+                                                <td><i class="fas fa-circle text-c-green f-10"></i></td>
+                                                {% elif test.test_status == "COMPLETED" %}
+                                                <td><i class="fas fa-circle text-c-green f-10"></i></td>
+                                                {% else %}
+                                                <td><i class="fas fa-circle text-c-yellow f-10"></i></td>
+                                                {% endif %}
+                                                <td><a  href="../tests/{{ test.id }}/" type="button" class="btn btn-outline-primary feather icon-info" title="" data-toggle="tooltip" data-original-title="Einsehen"></a></td>
+                                                <td><a  href="../deletetest/{{ test.id }}/" type="button" class="btn btn-primary feather icon-trash-2" title="" data-toggle="tooltip" data-original-title="Löschen"></a></td>
+                                                
+                                            </tr>
+
+                                            {% endfor %}
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ basic-table ] end -->
+                    
+                </div>
+
+                 <!-- [ basic-table ] start -->
+                  
+
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

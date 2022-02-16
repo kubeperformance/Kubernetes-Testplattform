@@ -1,0 +1,326 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Teststatus {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <!--<h5 class="m-b-10">Form Elements</h5>-->
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">New Test</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">Teststatus</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ breadcrumb ] end -->
+
+<div class="main-body">
+    <div class="page-wrapper">
+        <h2 class="f-w-300">Teststatus</h2>
+                </br>
+                <div class="row">
+                  
+                    <div class="col-sm-6">
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <h5>Erstellter Test</h5>
+                            </div>
+
+                            <div class="card-block">
+                               
+                                <div class="card-block border-bottom">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <i class="feather icon-hash f-30 text-c-blue"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="f-w-300">{{test.custom_test_name}}</h3>
+                                            <span class="d-block text-uppercase">NAME</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="card-block border-bottom">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <i class="feather icon-clock f-30 text-c-green"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="f-w-300">{{test.time_created}}</h3>
+                                            <span class="d-block text-uppercase">Zeitpunkt des Tests</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-block">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <i class="feather icon-grid f-30 text-c-purple"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="f-w-300">{{test.test_name}}</h3>
+                                            <span class="d-block text-uppercase">TYP</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                 
+
+                    <div class="col-sm-6">
+                        <div class="card note-bar">
+                            <div class="card-header">
+                                <h5>Notifications</h5>
+
+                            </div>
+                            <div id="eventList" class="card-block p-0">
+                                <!--Events go here-->
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="row">
+
+                   
+                    <div class="col-sm-10">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Current Test Progress</h5>
+                            </div>
+
+                            <div class="card-block">
+                               <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" id="progressbar"
+                                        role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: 1%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2" id="button-space">                                                                                  
+                </div>
+                </div>
+
+                
+
+    </div>
+</div>
+
+
+
+</div>
+</div>
+
+
+
+                
+                {% endblock content %}
+
+                {% block javascripts %}
+                
+
+                <script>
+
+                    
+                    
+                    var message = ""
+                    // @ts-ignore
+                    {% if messages %}
+                    // @ts-ignore
+                    {% for message in messages %}
+                    message = "{{ message }}"
+                    //alert("{{ message }}");
+                    {% endfor %}
+                    {% endif %}
+
+                    
+                </script>
+
+                <script>
+
+                    
+                    max_count = 50
+                    counter = 0
+                    completed = false
+                    currentEvents = []
+
+                    let test_id 
+
+                  
+                    if (message != "") {
+
+
+                        test_id = {{test.id}};
+                       
+                        calledUrl = "http://localhost:8000/testevents/" + message + "/"
+
+                        $(document).ready(function () {
+                           
+                            setTimeout(executeQuery, 5000)
+
+                        });
+                    }
+
+                    function makeQuery() {
+                        if (counter <= max_count) {
+                            if (completed == false) { setTimeout(executeQuery, 2000); }
+                        }
+
+                        counter++;
+                    }
+
+
+                    function executeQuery() {
+                        console.log("Making Ajax Call to " + calledUrl)
+
+
+                        $.ajax({
+                            url: calledUrl,
+                            type: 'get', // This is the default though, you don't actually need to always mention it
+
+                            success: function (data) {
+                                mycounter = 0
+                                // For each element in Array
+                                $.each(data, function (index, value) {
+                                    //appendNotification(value.fields.state, value.fields.message, value.fields.timestamp)
+                                    if (currentEvents.length == 0) {
+                                        appendNotification(value.fields.state, value.fields.message, value.fields.timestamp)
+                                        currentEvents.push(value)
+
+                                    }
+                                    else {
+
+                                        if (containsObject(value, currentEvents) == false) {
+                                            appendNotification(value.fields.state, value.fields.message, value.fields.timestamp)
+                                            if (value.fields.state == "Completed") { completed = true }
+                                            currentEvents.push(value)
+                                        }
+                                        else { console.log("Element already in Array " + value.fields.message) }
+
+                                    }
+                                });
+                            },
+                            failure: function (data) {
+                            }
+                        });
+
+                        makeQuery()
+                    }
+
+                    function updateProgressBar(title) {
+                        
+                                            
+                        if(title=="Created Locally") {
+                            
+                            $("#progressbar").attr("style","width: 20%");
+                        }
+                        else if(title=="Completed") {
+                            
+                            $("#progressbar").attr("style","width: 100%");
+                            
+                        }
+                        
+                    }
+
+                    function containsObject(obj, list) {
+                        var i;
+                        for (i = 0; i < list.length; i++) {
+                            if (list[i].fields.timestamp == obj.fields.timestamp) {
+                                return true;
+                            }
+                        }
+
+                        return false;
+                    }
+
+                    function appendButton(id) {
+
+                        
+                        var html = '<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href = \'/tests/' + id + '/\';">Test anzeigen</button>';
+                        $('#button-space').append(html);
+
+                    
+
+                    }
+
+                    function appendNotification(title, message, time) {
+                        
+                        icon = "far fa-bell"
+                        
+                        if(title=="Created Locally") {
+                            
+                            icon = "fas fa-info-circle f-40"
+                           
+                        }
+                        else if(title=="Completed") {
+                            icon = "fas fa-check f-30"
+                            $("#progressbar").attr("style","width: 100%");
+                            appendButton(test_id)
+                        }
+
+                        else if("title" == "Pod Created")
+                        {
+                            icon = "fas fa-cube f-40"
+                            alert(title)
+                        }
+
+                        else if("title" == "Custom Resource Created")
+                        {
+                           alert(title)
+                           icon = "fas fa-file f-40"
+                        }
+
+                        else {  icon = "fas fa-info-circle f-40"}
+                        
+                        iconHTML = '<i class="' + icon + '"></i>'
+
+                        var html = '<span class="media friendlist-box">' +
+                            ' <div class="mr-3 photo-table">' +
+                            iconHTML +
+                            '</div>' +
+                            ' <div class="media-body">' +
+                            ' <h6>' + title + '</h6>' +
+                            ' <span class="f-12 float-right text-muted">' + time + '</span>' +
+                            '  <p class="text-muted m-0">' + message + ' </p>' +
+                            '</div>' +
+                            '</span>';
+                        console.log(html)
+
+                        updateProgressBar(title);
+
+                        $('#eventList').append(html);
+                        console.log($('#eventList').html);
+
+
+                    }
+
+                </script>
+
+
+                {% endblock javascripts %}

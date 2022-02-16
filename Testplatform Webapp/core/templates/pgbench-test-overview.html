@@ -1,0 +1,145 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page Blank {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Detailansicht PGBench-Test</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a>PGBench-Testübersicht</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+
+                {% include "test-overview-fragment.html" %}
+                
+             <!-- 1st Row End-->
+            <hr class="mt-3 mb-3" />
+            <!--2nd Row Start-->
+
+            <h2 class="f-w-300">Ergebnisse PGBench-Test</h2>
+            
+            <!--3rd Row End-->
+            <div class="row col-md-12"></div>
+
+            <div class="row">
+               <div class="col-md-6">
+                 <div class="card">
+                        <div class="card-block border-bottom">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-clock f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300">{{ pgbench_result.duration_in_seconds }} Sekunden</h3>
+                                    <span class="d-block text-uppercase">Ausführungszeit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block border-bottom">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-bar-chart f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300 text-uppercase">{{pgbench_result.scaling_factor}}</h3>
+                                    <span class="d-block text-uppercase">Skalierungsfaktor</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-block border-bottom">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-sliders f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300">{{pgbench_result.number_of_threads}}</h3>
+                                    <span class="d-block text-uppercase">Anzahl Threads</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-block border-bottom">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-users f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300">{{pgbench_result.number_of_clients}}</h3>
+                                    <span class="d-block text-uppercase">Anzahl Clients</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-block border-bottom">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-download f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300">{{pgbench_config.selects_only}}</h3>
+                                    <span class="d-block text-uppercase">SELECTS only?</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div                              
+            </div>
+            <div class="col-md-6">
+                <div class="card theme-bg2">
+                           <div class="card-block">
+                               <div class="row align-items-center justify-content-center">
+                                   <div class="col-auto">
+                                       <i class="feather icon-watch f-30 text-white"></i>
+                                   </div>
+                                   <div class="col">
+                                       <h2 class="text-white font-weight-bold f-w-300">{{pgbench_result.transactions_per_second }}</h2>
+                                       <h5 class="text-white">Transaktionen pro Sekunde</h5>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+   
+                       <div class="card theme-bg2">
+                           <div class="card-block">
+                               <div class="row align-items-center justify-content-center">
+                                   <div class="col-auto">
+                                       <i class="feather icon-check f-30 text-white"></i>
+                                   </div>
+                                   <div class="col">
+                                       <h2 class="text-white font-weight-bold f-w-300">{{pgbench_result.number_of_transactions_processed }} </h2>
+                                       <h5 class="text-white">Transaktionen durchgeführt</h5>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+               </div>
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

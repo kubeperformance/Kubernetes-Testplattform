@@ -1,0 +1,247 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+{% block javascripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock javascripts %}
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+
+               <!-- <div class="row col-12">
+                    <h1 class="heading-1">Kubernetes Testplattform</h1>
+                    </div>-->
+                    <div class="col-xs-12" style="height:20px;"></div>
+
+                    <div class="row col-12">
+                        <h2 class="display-4">Kubernetes Testplattform - Start</h2>
+                        </div>
+    
+                        
+               
+
+                <!-- [ New Test Section ] start -->
+                <!-- <h2 class="display-4">Einen neuen Test starten</h2>-->
+               
+
+                
+               
+
+
+                                
+
+                
+
+                <div class="row col-12">
+                    <h3 class="heading-3">Leistungstests</h3>
+                    </div>
+
+                    <div class="col-xs-12" style="height:50px;"></div>
+
+                
+                <div class="row">
+
+                    <div class="col-6">
+                    
+                        <div class="card table-card">
+                            <div class="row-table">
+                                <div class="col-auto theme-bg2 text-white p-t-50 p-b-50">
+                                    <i class="feather icon-package f-30"></i>
+                                </div>
+                                <div class="col text-left">
+                                    <h3 class="f-w-300">Netzwerk</h3>
+                                    <span class="text-uppercase d-block m-b-10">iperf3</span>
+                                </div>
+                                <div class="col">
+                                    <a  href="./newiperf3test.html" class="btn text-uppercase border btn-block btn-outline-secondary">Test Starten
+                                        </a>
+
+                                </div>
+                            </div>
+                        </div>
+                                                    
+                            
+                      
+
+                                
+                        
+                            <div class="card table-card">
+                                <div class="row-table">
+                                    <div class="col-auto theme-bg text-white p-t-50 p-b-50">
+                                        <i class="feather icon-save f-30"></i>
+                                    </div>
+                                    <div class="col text-left">
+                                        <h3 class="f-w-300">Speicher</h3>
+                                        <span class="text-uppercase d-block m-b-10">FIO</span>
+                                    </div>
+                                    <div class="col">
+                                        <a href="./newfiotest.html" class="btn text-uppercase border btn-block btn-outline-secondary">Test Starten
+                                            </a>
+    
+                                    </div>
+                                </div>
+                            </div>
+                   
+    
+                       
+                            <div class="card table-card">
+                                <div class="row-table">
+                                    <div class="col-auto theme-bg2 text-white p-t-50 p-b-50">
+                                        <i class="feather icon-list f-30"></i>
+                                    </div>
+                                    <div class="col text-left">
+                                        <h3 class="f-w-300">Datenbank</h3>
+                                        <span class="text-uppercase d-block m-b-10">pgbench</span>
+                                    </div>
+                                    <div class="col">
+                                        <a href="./newpgbenchtest.html" class="btn text-uppercase border btn-block btn-outline-secondary">
+                                            Test Starten</a>
+    
+                                    </div>
+                                </div>
+                            </div>
+                   
+                
+
+                    </div>
+
+                    <div class="col-6">
+                
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Tests im Überblick</h5>
+                            <span class="d-block pt-2">Anzahl</span>
+                            <div class="card-header-right">
+                                <div class="btn-group card-option">
+                                   
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class ="col-12">
+                                <canvas id="bar-chart" width="800" height="350"></canvas>
+                            </div>
+                            
+
+                        </div>
+                        <script type="text/javascript">
+                          
+                                new Chart(document.getElementById("bar-chart"), {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ["IPerf3", "FIO", "PGBench", ],
+                                        datasets: [
+                                            {
+                                                label: "Anzahl Tests",
+                                                backgroundColor: ["#00ccd9", "#9c8ecf", "#00e2bf"],
+                                                data: [{{ iperf3_test_count }}, {{ fio_test_count }}, {{ pgbench_test_count }}]
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        legend: { display: false },
+                                        title: {
+                                            display: true,
+                                            text: 'Predicted world population (millions) in 2050'
+                                        }
+                                    }
+                                });
+                         
+                        </script>
+                    </div>
+                </div>
+
+
+                <!--Node overview Start-->
+
+                <div class="col-xs-12" style="height:150px;"></div>
+    
+                        <div class="row col-12">
+                            <h3 class="heading-3">Knoten im Cluster</h3>
+                            </div>
+                            <div class="col-xs-12" style="height:50px;"></div>
+                <!--node information-->
+                <div class="row col-lg-12">
+                    <!--For Loop for each node-->
+                    {% for node in nodes %}
+                 
+                   
+
+                    <div class="col-4">
+                        <div class="card card-social">
+                            <div class="card-block border-bottom">
+                                <div class="row align-items-center justify-content-center">
+                                    <i class="feather icon-server text-primary f-36"></i>
+                                  
+                                    <div class="col">
+                                        <h3 class="f-w-300">Cluster Node</h3>
+                                        
+                                    </div>
+                                    <div class="col text-right">
+                                        <h3 >{{ node.name }}</h3>
+                                       
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-block">
+                                <div class="row align-items-center justify-content-center card-active">
+                                    <div class="col-4">
+                                        <h6 class="text-center m-b-10"><span
+                                                class="lead m-t-0">IP: {{ node.ip_address }}</span></h6>
+                                     
+                                    </div>
+                                    <div class="col-4">
+                                        <h6 class="text-center m-b-10"><span
+                                                class="lead m-t-0">OS:  {{ node.os|slice:":19" }}</span></h6>
+                                     
+                                    </div>
+                                   <!-- <div class="col-4">
+                                        <h6 class="text-center m-b-10"><span
+                                                class="lead m-t-0">Architecture: {{ node.architecture }}</span></h6>
+                                     
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+
+
+                </div>
+
+               
+                
+                </div>
+                
+
+                <!--Elements end-->
+         
+                <!-- [ Main Content ] end -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->

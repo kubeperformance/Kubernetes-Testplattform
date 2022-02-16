@@ -1,0 +1,151 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Forms {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Neuer Test</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Home</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Neuer FIO Test</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row col-md-12"> </div>
+                <h2 class="f-w-300">Einen neuen FIO-Test erstellen</h2> 
+               
+                <div class="col-xs-12" style="height:80px;"></div>
+                    <div class="row col-md-12 justify-content-center">
+                        <!--Place Icon here-->
+                        
+                    </div>
+                    <div class="row justify-content-center">
+                    <div class="col-md-10">
+                       
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row"></div>
+                                
+                                <h5>Neue Konfiguration</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-sm-12">
+                                    <h5>FIO Test Konfiguration</h5> 
+                                    
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form action="/addnewfiotest/" id="newfiotestform" method="POST">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label>Test Name</label>
+                                                    <input type="text" name="testname" class="form-control"
+                                                        placeholder="Enter custom test name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Block Size</label>
+                                                    <select class="form-control" id="blocksize_field" name="block_size">
+                                                        <option>32</option>
+                                                        <option>64</option>
+                                                        <option>128</option>
+                                                        <option>256</option>
+
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Access Mode</label>
+                                                    <select class="form-control" id="access_mode_field"
+                                                        name="access_mode">
+                                                        <option>Sequential Read</option>
+                                                        <option>Sequential Write</option>
+                                                        <option>Random Read</option>
+                                                        <option>Random Random Write</option>
+
+
+
+                                              <img src="/static/assets/images/background_icons/save_blue.svg" heigt: auto; class="rounded float-right img-fluid" alt="">      </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>PV Claim Name</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Persistent Volume Claim Name" name="pv_claim_name">
+                                                </div>
+
+                                                
+
+                                                <div class="form-group form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                                        name="reset_refillbuffer">
+                                                    <label class="form-check-label" for="exampleCheck1">Reset Refill
+                                                        Buffer</label>
+                                                </div>
+
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label>Node</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Node Name" name="nodename">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>File Size (MB)</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter File Size in Megabyte" name="filesize">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Namespace</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Kubernetes Namespace" name="namespace">
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- [ Main Content ] end -->
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="float-md-right"><input type="submit" class="btn btn-primary"
+                                            value="Test Starten"></input></div>
+                                </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+               
+                    
+                    
+                </div>
+                    
+                 
+
+       
+                <!--2nd ROW-->
+              
+
+                {% endblock content %}
+
+                <!-- Specific Page JS goes HERE  -->

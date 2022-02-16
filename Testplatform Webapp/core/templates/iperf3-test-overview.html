@@ -1,0 +1,293 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page Blank {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="/static/assets/plugins/chart-morris/css/morris.css">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Detailansicht Iperf3-Test</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a>iPerf3 Test-Übersicht</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+
+                {% include "test-overview-fragment.html" %}
+                
+             <!-- 1st Row End-->
+            <hr class="mt-3 mb-3" />
+            <!--2nd Row Start-->
+
+            <h2 class="f-w-300">Ergebnisse iPerf3-Test</h2>
+            <div class="row">
+                <div class="col-xl-6 col-md-6">
+                    <div class="card table-card">
+                        <div class="row-table">
+                        <div class="col-auto theme-bg2 text-white p-t-50 p-b-50">
+                        <i class="feather icon-smartphone f-30"></i>
+                        </div>
+                        <div class="col text-center">
+                        <span class="text-uppercase d-block m-b-10">Client Node ({{iperf3result.client_ip}})</span>
+                        <h3 class="f-w-300">{{iperf3_config.client_node}}</h3>
+                        </div>
+                        </div>
+                        </div>
+
+                </div>
+
+                <div class="col-xl-6 col-md-6">
+                    <div class="card table-card">
+                        <div class="row-table">
+                        <div class="col-auto theme-bg2 text-white p-t-50 p-b-50">
+                        <i class="feather icon-server f-30"></i>
+                        </div>
+                        <div class="col text-center">
+                        <span class="text-uppercase d-block m-b-10">Server Node ({{iperf3result.server_ip}})</span>
+                        <h3 class="f-w-300">{{iperf3_config.server_node}}</h3>
+                        </div>
+                        </div>
+                        </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-6 col-md-6">
+
+                    <div class="card theme-bg2">
+                        <div class="card-block">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-upload f-30 text-white"></i>
+                                </div>
+                                <div class="col">
+                                    <h2 class="text-white f-w-300">{{iperf3result.sent_MB_s|slice:":5" }} MBps</h2>
+                                    <h5 class="text-white">Upload-Geschwindigkeit im Mittel</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card theme-bg2">
+                        <div class="card-block">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-download f-30 text-white"></i>
+                                </div>
+                                <div class="col">
+                                    <h2 class="text-white f-w-300">{{iperf3result.received_MB_s|slice:":5" }} MBps</h2>
+                                    <h5 class="text-white">Download-Geschwindigkeit im Mittel</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="col-xl-6 col-md-6">
+
+
+
+
+                    <div class="card">
+                        <div class="card-block border-bottom">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-clock f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300">{{iperf3result.duration}} Sekunden</h3>
+                                    <span class="d-block text-uppercase">Ausführungszeit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block border-bottom">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-file-text f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300 text-uppercase">{{iperf3result.protocol}}</h3>
+                                    <span class="d-block text-uppercase">Protokoll</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-repeat f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300">{{iperf3result.system_info}}</h3>
+                                    <span class="d-block text-uppercase">System Info</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--2nd Row End-->
+            </div>
+
+            <!--3rd Row Start-->
+
+            <div class="row"><h3>Auswertung</h3></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                
+                
+
+                 <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Transmission Rate per Second</h5>
+                            </div>
+                            <div class="card-block">
+                                <div id="morris-bar-chart" style="height:300px"></div>
+                            </div>
+                        </div>
+                    </div>
+                
+                
+                </div>
+                <div class="col-md-6">                  
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                        <h5 class="mb-0"><a href="#!" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="">Command Line Output</a></h5>
+                        </div>
+                        <div id="collapseOne" class="card-body collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <p class="m-b-30">
+                                Command Line Output for Test <cite title="Source Title">{{test.custom_test_name}}</cite>
+                            </p>
+                            <blockquote class="blockquote">
+                                
+                               <!-- <pre class="pre-scrollable"> </pre>-->
+                                    <code>
+                                        <!-- Lines of Code Starts -->                                        
+                                        <p>{{test.raw_output}}</p>
+                                        <!-- Lines of code ends -->
+                                    </code>
+                               
+
+                             
+                                
+                            </blockquote>    
+                        </div>
+                        </div>
+
+                </div>
+            </div>
+            <!--3rd Row End-->
+
+            <div class="row">
+               
+         
+
+            </div>
+
+
+
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+    <script src="/static/assets/plugins/chart-morris/js/raphael.min.js"></script>
+    <script src="/static/assets/plugins/chart-morris/js/morris.min.js"></script>
+
+
+<script>
+
+'use strict';
+
+var mb_per_second = {{iperf3result.transmission_rate_per_second}}
+
+function getDataForChart() {
+
+   var data = "["
+
+    for (var i = 0; i < mb_per_second.length; i++) { 
+        
+        var number = i+1      
+        var datapoint = "{\"y\":" + "\"" + number.toString() + "\"," + " \"a\": "  + "\"" + mb_per_second[i].toString() + "\"" +  "},"
+
+        data = data + datapoint
+    
+    }
+
+
+    data = data + "]"
+    // Remove last ',' in String for JSON-Conformity
+    var formatted = data.replace(/,([^,]*)$/, '$1')
+
+    return formatted
+}
+
+$(document).ready(function() {
+    
+    
+    setTimeout(function() {
+    // [ bar-simple ] chart start
+    //alert("array:" + mb_per_second)
+   
+    
+    var printed = JSON.parse(getDataForChart())
+    console.log(printed)
+    //var data = JSON.parse(printed)
+
+    
+    var elem = 'morris-bar-chart'
+    Morris.Bar({
+        element: 'morris-bar-chart',
+        data: printed,
+        xkey: 'y',
+        barSizeRatio: 0.90,
+        barGap: 2,
+        resize: true,
+        responsive:true,
+        ykeys: ['a',],
+        labels: ['Value'],
+        barColors: ["0-#1de9b6-#1dc4e9", "0-#899FD4-#A389D4", "#04a9f5"]
+    });
+    // [ bar-simple ] chart end
+
+        }, 200);
+});
+
+
+</script>
+    
+{% endblock javascripts %}
+

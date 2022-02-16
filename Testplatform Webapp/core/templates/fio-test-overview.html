@@ -1,0 +1,172 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page Blank {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Detailansicht FIO-Test</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a>FIO Test-Übersicht</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+
+                {% include "test-overview-fragment.html" %}
+                
+             <!-- 1st Row End-->
+            <hr class="mt-3 mb-3" />
+            <!--2nd Row Start-->
+
+            <h2 class="f-w-300">Ergebnisse des FIO-Tests</h2>
+
+            <!--- ><div class="row">
+                <div class="col-xl-6 col-md-6">
+
+                    <div class="card theme-bg2">
+                        <div class="card-block">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-download f-30 text-white"></i>
+                                </div>
+                                <div class="col">
+                                    <h2 class="text-white f-w-300">#Write</h2>
+                                    <h5 class="text-white">Schreibgeschwindigkeit Gesamt</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card theme-bg2">
+                        <div class="card-block">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-upload f-30 text-white"></i>
+                                </div>
+                                <div class="col">
+                                    <h2 class="text-white f-w-300">#Read</h2>
+                                    <h5 class="text-white">Lesegeschwindkgeit Gesamt</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="col-xl-6 col-md-6">
+
+
+
+
+                    <div class="card">
+                        <div class="card-block border-bottom">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-clock f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300">235</h3>
+                                    <span class="d-block text-uppercase">Benötigte Ausführungszeit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block border-bottom">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-file-text f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300">26</h3>
+                                    <span class="d-block text-uppercase">Dateigröße</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-auto">
+                                    <i class="feather icon-repeat f-30 text-c-blue"></i>
+                                </div>
+                                <div class="col">
+                                    <h3 class="f-w-300">26</h3>
+                                    <span class="d-block text-uppercase">Input / Output Operationen Gesamt</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--2nd Row End-->
+            </div> </-->
+
+            <!--3rd Row Start-->
+            <div class="row">
+                <div class="col-md-12"></div>
+                <div class="col-md-12">                  
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                        <h5 class="mb-0"><a href="#!" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="">Command Line Output</a></h5>
+                        </div>
+                        <div id="collapseOne" class="card-body collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <p class="m-b-30">
+                                Command Line Output for Test <cite title="Source Title">{{test.custom_test_name}}</cite>
+                            </p>
+                            <blockquote class="blockquote">
+                                
+                               <!-- <pre class="pre-scrollable"> </pre>-->
+                                    <code>
+                                        <!-- Lines of Code Starts -->                                        
+                                        <p>{{test.raw_output}}</p>
+                                        <!-- Lines of code ends -->
+                                    </code>
+                               
+
+                             
+                                
+                            </blockquote>    
+                        </div>
+                        </div>
+
+                </div>
+            </div>
+            <!--3rd Row End-->
+
+            <div class="row">
+               
+         
+
+            </div>
+
+
+
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
